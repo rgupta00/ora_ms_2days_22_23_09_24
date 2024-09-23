@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active:
+      - "qa"
+  jpa:
+    show-sql: true
+  application:
+    name: coupons
+server:
+  port: 8085
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    info:
+      enabled: true
+build:
+  version: "1.0"
+info:
+  message: "Welcome to busycoder coupon default profile"
+  name: "Raj: Product Owner coupon default profile"

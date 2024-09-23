@@ -1,0 +1,6 @@
+INDEX VERSION 1.134+C:\ora_ms_2days_22_23_09_24\code_ms_practice\productapp_v1_gt\.metadata\.plugins\org.eclipse.jdt.core
+2524247980.index
+2892284444.index
+697164339.index
+1865797976.index
+4186246570.index
