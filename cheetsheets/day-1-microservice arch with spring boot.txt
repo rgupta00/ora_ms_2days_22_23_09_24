@@ -186,25 +186,97 @@ public interface AccountService {
 	public Account getById(int accId);
 }
 
+public class AccountServiceImpl implements AccountService{
+
+	private AccountRepo accountRepo;
+	
+	public AccountServiceImpl() {
+		accountRepo=new AccountRepoMapImpl(); //problem with di
+	}
+	@Override
+	public List<Account> getAllAccounts() {
+		return accountRepo.getAll();
+	}
+
+	@Override
+	public void transfer(int fromAccId, int toAccId, BigDecimal amount) {
+		Account fromAcc=getById(fromAccId);
+		Account toAcc=getById(toAccId);
+		fromAcc.setBalance(fromAcc.getBalance().subtract(amount));
+		toAcc.setBalance(toAcc.getBalance().add(amount));
+		
+		accountRepo.update(fromAcc);
+		
+		accountRepo.update(toAcc);
+		
+	}
+
+	@Override
+	public void withdraw(int accId, BigDecimal amount) {
+		Account acc=getById(accId);
+		acc.setBalance(acc.getBalance().subtract(amount));
+		accountRepo.update(acc);
+	}
+
+	@Override
+	public void deposit(int accId, BigDecimal amount) {
+		Account acc=getById(accId);
+		acc.setBalance(acc.getBalance().add(amount));
+		accountRepo.update(acc);
+	}
+
+	@Override
+	public Account getById(int accId) {
+		Account account=accountRepo.getById(accId);
+		if(account==null)
+			throw new BankAccountNotFoundException("account with id "+ accId +" is not found");
+		return account;
+	}
+
+}
 
 
+Now let see how u can  use DI?
+-------------------------------
+refer : My YT 
+
+	XML (Lagacy)
+	Annotation + Java config
+	bean wiring /DI
+	
+	spring
+	
+	take the object of dao layer and inject to service layer
+	how he come to know.. to need to tell spring
+	bean wiring
+	
+		@Component
+		|
+	----------------------------------
+	|				 |				|
+	@RestController @Service   @Repository
+	
+	@Controller
 
 
+Need of AOP:
+------------
+ spring use aop at lots of places
+ tx
+ sec
+ exception handling
+ 
+
+How spring boot works?
+-----------------------
+sb have a main class --> 
+
+@SpringBootApplication = @SpringBootConfiguration + @EnableAutoConfiguration + @ComponentScan
+
+ @EnableAutoConfiguration? RAD and it do openiated approach*
+ 
 
 
-
-Day 1 Session 2:
--------------
-=> Spring data
-=> Spring boot web application, Spring MVC arch
-=>Spring boot Monotring and Logging
-=> Spring boot security
-=> spring boot profile
-=> spring boot actuator
-
-=>Apply 12 Factor methodology in Microservices using Spring Cloud
-=> Spring Boot microservice architecture
-=> spring boot openfeign
 
 
 
@@ -295,6 +367,20 @@ public class AccountCrudController {
 
 
 
+Day 1 Session 2:
+-------------
+=> Spring REST
+	Controlling http status code
+	Exception handling
+	Validation
+	
+=> Spring data
+=>Spring boot Monotring and Logging
+=> spring boot profile
+=> spring boot actuator
+=>Apply 12 Factor methodology in Microservices using Spring Cloud
+=> Spring Boot microservice architecture
+=> spring boot openfeign
 
 
 spring boot bannner:
