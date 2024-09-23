@@ -372,9 +372,21 @@ Day 1 Session 2:
 => Spring REST
 	Controlling http status code
 	Exception handling
-	Validation
+
 	
 => Spring data
+
+		web -------------- service -------------------repo -----------db
+														ramu/shayau
+														crud op : automize it
+		Adv:
+		1. u dont have to write dao layer
+		2. it support both RDBMS and NOSQL
+		
+		JPA+H2
+		
+		Validation
+	
 =>Spring boot Monotring and Logging
 => spring boot profile
 => spring boot actuator
