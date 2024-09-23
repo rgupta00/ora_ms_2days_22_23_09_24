@@ -1,3 +1,7 @@
+System design:
+	LLSD
+	HLSD
+
 Workshop Microservices Architecture with Spring boot
 ------------------------------------------------------
 Topic
@@ -5,12 +9,91 @@ Topic
     2. Getting started with Spring Boot
     3. Building RESTFul Microservices using Spring MVC
     4. Interacting with database using Spring Data
-    5. Apply 12 Factor methodology in Microservices using Spring Cloud
+    5. Apply 12 Factor/15 Factor methodology in Microservices using Spring Cloud
     6. Introduction to Publish Subscribe Messaging
     7. Implementing Asynchronous Communication using Kafka
     8. Introduction to Containerization
     9. Building Docker Images for Microservices
 
+
+fundamentals:
+-------------
+	J2EE (group of specification for creating dynamic and dist web application)
+	1997
+		servlet jsp ejb jms
+		
+	ejb: enterpirse java beans--> distibuted logic
+	
+	u----> me --------------- friend
+			db					db
+	impl is quite difficult
+	
+Rod Johnson (2004)
+-----------------
+	Spring framework : simplication of J2EE
+	to make ur life easy
+	
+	but happen: spring become so popular and it have rooted out ejb from the market
+	
+Spring framework:
+------------------
+	Depdendency Injection DI 
+	Aspect Oriented Programming AOP
+	SpringJdbc, Spring Hib etc
+	Spring mvc
+	Spring Sec
+	Spring Batch processing
+	......
+	if u are making a project by using spring u have to write lots of xml configration/ java config
+	
+	Bean: Object whose life cycle can be managed by spring framework
+	
+	Bean= BUsiness bean + infra bean
+	In spring u have to code both of them
+	
+Spring Boot:
+-----------
+	A Wapper over spring framework
+	it make ur life very easy
+	It is rapid app dev frameork--> Openioned approach*
+	
+	SB= Spring - Infra bean + Embedded tomcat + actuator + spring data + it also spport ms dev
+	
+	=> Auto-Configuration 
+
+	=> Dependency Management
+
+	=> Externalized Configuration
+		bean can be configured through application.properties file 
+		without touching java or xml config
+
+	=> Production support
+		We get health checking, application and jvm metrics, 
+		jmx via http and a few more things for free
+
+	=> Runnable Jars
+		 We can package your application as a runnable jar with embedded tomcat
+		 included so it presents a self-contained deployment unit
+
+	=> Microservice
+
+Diff bw spring and spring boot
+----------------------------
+https://arnaud-nauwynck.github.io/docs/Intro-SpringBoot.pdf
+
+Should i learn spring before spring boot
+it depends: if ur a techi --> should learn
+if mgt --> for them not req
+
+
+How to get started with spring boot:
+--------------------------------------
+option 1:
+https://start.spring.io/
+
+option 2: STS 4
+-----------------
+JDK 17 + maven + sts + postman + H2 database + docker/rancher
 
 
 Day 1 Session 1: 
@@ -20,7 +103,95 @@ Day 1 Session 1:
 => Spring boot aop
 => spring mvc basics
 => REST basics
-=> Spring boot REST application
+
+
+
+Understand Depdendency Injection
+---------------------------------
+
+web ----------------service --------------repo (dao) ------------db
+
+creating bank app from start:
+
+create dao layer:
+------------------
+//DTO
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Account {
+    private int id;
+    private String name;
+    private BigDecimal balance;
+
+}
+
+create the dao layer:
+----------------------
+
+
+public interface AccountRepo {
+    public List<Account>getAll();
+	public void update(Account account);
+	public Account getById(int id);
+}
+
+implementaiton:
+------------------
+
+public class AccountRepoMapImpl implements AccountRepo{
+	
+	public Map<Integer, Account> accountMap=new HashMap<>();
+
+	public AccountRepoMapImpl() {
+        accountMap.put(1, new Account(1,"raj",BigDecimal.valueOf(6000.00)));
+        accountMap.put(2, new Account(2,"ekta",BigDecimal.valueOf(6000.00)));
+	}
+	
+	@Override
+	public List<Account> getAll() {
+		return new ArrayList<>(accountMap.values());
+	}
+
+	@Override
+	public void update(Account account) {
+		accountMap.put(account.getId(), account);
+	}
+
+	@Override
+	public Account getById(int id) {
+		return accountMap.get(id);
+	}
+
+}
+
+
+add ex to exception package:
+-----------------------------
+public class BankAccountNotFoundException extends RuntimeException{
+    public BankAccountNotFoundException(String message) {
+        super(message);
+    }
+}
+
+
+now we will write service layer:
+--------------------------------
+
+public interface AccountService {
+   	public List<Account> getAllAccounts();
+	public void transfer(int fromAccId, int toAccId, BigDecimal amount);
+	public void withdraw(int accId, BigDecimal amount);
+	public void deposit(int accId, BigDecimal amount);
+	public Account getById(int accId);
+}
+
+
+
+
+
+
+
 
 Day 1 Session 2:
 -------------
@@ -50,25 +221,6 @@ Day 1 Session 1:
 
 
 
-Why Spring boot?
-----------------
-	=> Auto-Configuration 
-
-	=> Dependency Management
-
-	=> Externalized Configuration
-		bean can be configured through application.properties file 
-		without touching java or xml config
-
-	=> Production support
-		We get health checking, application and jvm metrics, 
-		jmx via http and a few more things for free
-
-	=> Runnable Jars
-		 We can package your application as a runnable jar with embedded tomcat
-		 included so it presents a self-contained deployment unit
-
-	=> Microservice
 
 Spring Boot Hello world:
 ---------------------------
@@ -103,64 +255,6 @@ public class HelloController {
 
 
 	
-Understand Depdendency Injection
----------------------------------
-
-web ----------------service --------------repo (dao) ------------db
-
-creating bank app from start:
-
-create dao layer:
-------------------
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Account {
-    private int id;
-    private String name;
-    private double balance;
-
-}
-
-create the dao layer:
-----------------------
-public class BankAccountNotFoundException extends RuntimeException{
-    public BankAccountNotFoundException(String message) {
-        super(message);
-    }
-}
-
-public interface AccountRepo {
-    public List<Account>getAll();
-	public void update(Account account);
-	public Account getById(int id);
-}
-
-implementaiton:
-------------------
-
-public class AccountRepoMapImpl implements AccountRepo{
-    public Map<Integer, Account> accountMap=new HashMap<>();
-    public AccountRepoMapImpl(){
-        accountMap.put(1, new Account(1,"raj",6000.00));
-        accountMap.put(2, new Account(2,"ekta",6000.00));
-    }
-    @Override
-    public List<Account> getAll() {
-        return new ArrayList<>(accountMap.values());
-    }
-	//.............
-}
-
-now we will write service layer:
---------------------------------
-
-public interface AccountService {
-    public List<Account> getAll();
-}
-
-
-
 
 Day 3: spring boot development:
 ---------------------------------
