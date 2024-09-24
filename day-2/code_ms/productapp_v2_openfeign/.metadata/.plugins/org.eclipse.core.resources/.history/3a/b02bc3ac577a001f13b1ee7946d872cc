@@ -1,0 +1,28 @@
+package com.order.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.order.dto.OrderRequest;
+import com.order.dto.OrderResponse;
+import com.order.service.BookOrderService;
+import com.order.service.CouponService;
+import com.order.service.CustomerService;
+import com.order.service.ProductService;
+
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
+public class BookOrderServiceImpl implements BookOrderService{
+	private final CouponService couponService;
+	private final ProductService productService;
+	private final CustomerService customerService;
+	
+	
+	@Override
+	public OrderResponse bookAnOrder(OrderRequest orderRequest) {
+		return null;
+	}
+
+}

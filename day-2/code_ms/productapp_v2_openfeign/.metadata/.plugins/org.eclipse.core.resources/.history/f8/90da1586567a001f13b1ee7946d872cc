@@ -1,0 +1,12 @@
+package com.order.service;
+
+import com.order.dto.CustomerDto;
+
+public class CustomerServiceImpl implements CustomerService{
+
+	@Override
+	public CustomerDto getCustomerDto(int customerId) {
+		return null;
+	}
+
+}

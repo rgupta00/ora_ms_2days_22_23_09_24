@@ -6,18 +6,53 @@ spring cloud
 Project discussion
 
 Imp tools :
-	Euraka server
+===========
+	Euraka server: 
+				naming server
+				ms1---------ms2
+				hard coded url :(
+				logically name
+				Service discovery method
+				
+				spring boot app
+				
+				
 	spring cloud config server
+			mange the configuraiton centerally
+			
 	resilence4j
-	gateway
+		lib, fault tolerance and robustness
+		dist application more compilated
+		openfeign: call might fails
+		
+	API gateway
+		
+			
+									ms1
+					
+									ms2
+	client 		API gateway		
+					
+									m3
+					
+					
+									m4
+					
+									...
+				
 	sluth and zipkin
-	graphan and prometes..
+			Distributed log tracking
+			
+			m1--------m2-------m3-------m4------->
+			
+	graphana and prometes
 
 
 coupon	: 8085
 customer: 8081
 product :8082
 order : 9090
+
 configserver: 8071
 Eureka server: 8070
 api gateway: 8072
@@ -159,9 +194,9 @@ spring:
 
 now try:
 ---------
-http://localhost:8071/accounts/default
-http://localhost:8071/loans/default
-http://localhost:8071/cards/default
+http://localhost:8071/products/default
+http://localhost:8071/coupons/default
+http://localhost:8071/customers/default
 
 
 
@@ -187,7 +222,7 @@ http://localhost:8080/actuator/refresh
 
 
 
-
+https://www.youtube.com/watch?v=aC_siBP8rx8&ab_channel=SpringDeveloper
 
 
 

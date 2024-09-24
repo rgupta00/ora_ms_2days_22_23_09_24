@@ -1,0 +1,12 @@
+package com.order.dto;
+
+import java.time.LocalDateTime;
+
+public class OrderResponse {
+	private String id;
+	private double totalPrice;
+	private LocalDateTime orderDate;
+	private CustomerDto customer;
+	private ProductDto product;
+
+}

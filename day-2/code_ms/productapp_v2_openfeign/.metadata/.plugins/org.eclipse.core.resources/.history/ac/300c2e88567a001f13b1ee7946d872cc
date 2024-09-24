@@ -1,0 +1,18 @@
+package com.order.service;
+
+import org.springframework.stereotype.Service;
+
+import com.order.dto.CustomerDto;
+import com.order.feignproxy.CouponServiceProxy;
+import com.order.feignproxy.CustomerServiceProxy;
+@Service
+public class CustomerServiceImpl implements CustomerService{
+
+	private CustomerServiceProxy customerServiceProxy;
+	
+	@Override
+	public CustomerDto getCustomerDto(int customerId) {
+		return customerServiceProxy.getAnCustomer(customerId);
+	}
+
+}

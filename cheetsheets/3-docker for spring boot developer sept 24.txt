@@ -1,4 +1,18 @@
 
+Cloud native eng
+java -----------> spring ---->spring boot ---> aws --> services--> linux ----------ci/cd 
+												gcp				Networking
+												
+												messaging server: kafka / rabbitmq
+												
+																			jenkins vs github actions
+																			
+																			|
+																			docker
+																			|
+																			k8s
+																			....
+																			
 microservices
 docker , spring boot docker
 messaging using kafka

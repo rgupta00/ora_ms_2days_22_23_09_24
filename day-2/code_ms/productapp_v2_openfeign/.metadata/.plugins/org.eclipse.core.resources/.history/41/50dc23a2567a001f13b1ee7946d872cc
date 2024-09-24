@@ -1,0 +1,8 @@
+package com.order.service;
+
+import com.order.dto.CouponDto;
+
+public class CouponService {
+
+	public CouponDto getCouponDto(String couponCode);
+}

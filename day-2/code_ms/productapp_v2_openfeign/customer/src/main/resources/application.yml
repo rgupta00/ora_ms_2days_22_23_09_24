@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active:
+      - "qa"
+  jpa:
+    show-sql: true
+  application:
+    name: customers
+server:
+  port: 8081
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    info:
+      enabled: true
+build:
+  version: "1.0"
+info:
+  message: "Welcome to busycoder customer default profile"
+  name: "Raj: Product Owner customer default profile"

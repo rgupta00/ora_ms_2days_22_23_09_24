@@ -1,0 +1,11 @@
+package com.order.feignproxy;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.order.dto.CouponDto;
+
+public interface CouponServiceProxy {
+	@GetMapping(path="couponbyid/{id}")
+	public CouponDto getAnCouponById(@PathVariable(name="id") int id)
+}

@@ -1,0 +1,29 @@
+package com.product;
+
+import com.product.dto.ConfigDto;
+import com.product.dto.ProductDto;
+import com.product.entities.Product;
+import com.product.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+
+@EnableConfigurationProperties(ConfigDto.class)
+@SpringBootApplication
+public class ProductApplication implements CommandLineRunner {
+
+	@Autowired
+	private ProductService productService;
+
+	public static void main(String[] args) {
+		SpringApplication.run(ProductApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		productService.addProduct(new ProductDto("HP laptop", 60000));
+		productService.addProduct(new ProductDto("LG TV", 70000));
+	}
+}

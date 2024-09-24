@@ -5,12 +5,13 @@ import com.coupon.dto.CouponDto;
 import com.coupon.entities.Coupon;
 import com.coupon.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@RefreshScope
 @RestController
 public class CouponContoller {
 	
@@ -36,6 +37,7 @@ public class CouponContoller {
 	
 	@GetMapping(path="couponbycode/{couponCode}")
 	public CouponDto getAnCouponByCode(@PathVariable(name="couponCode") String couponCode){
+		
 		return couponService.getCouponByCouponCode(couponCode);
 	}
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\ora_ms_2days_22_23_09_24\code_ms_practice\productapp_v1_gt\product"/>
+			<item value="C:\ora_ms_2days_22_23_09_24\code_ms_practice\productapp_v1_gt\order"/>
+			<item value="C:\ora_ms_2days_22_23_09_24\code_ms_practice\productapp_v1_gt\customer"/>
+			<item value="C:\ora_ms_2days_22_23_09_24\code_ms_practice\productapp_v1_gt\coupon"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+</section>

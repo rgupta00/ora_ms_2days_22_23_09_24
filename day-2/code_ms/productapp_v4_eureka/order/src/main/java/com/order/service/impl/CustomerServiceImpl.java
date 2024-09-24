@@ -1,0 +1,20 @@
+package com.order.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.order.dto.CustomerDto;
+import com.order.feignproxy.CustomerServiceProxy;
+import com.order.service.CustomerService;
+
+@Service
+public class CustomerServiceImpl implements CustomerService{
+
+	@Autowired
+	private CustomerServiceProxy customerServiceProxy;
+	
+	@Override
+	public CustomerDto getCustomerDto(int customerId) {
+		return customerServiceProxy.getAnCustomer(customerId);
+	}
+}
