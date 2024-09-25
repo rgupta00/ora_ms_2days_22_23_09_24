@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "7d5f731e-d839-49b5-9a5b-d84f815a292d",
+		"name": "ProductAppMicoservice_oauth2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1432109"
+	},
+	"item": [
+		{
+			"name": "product ms",
+			"item": [
+				{
+					"name": "get all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8082/products"
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8082/products/1"
+					},
+					"response": []
+				},
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8082/configdto"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customer ms",
+			"item": [
+				{
+					"name": "get all customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/customers/1"
+					},
+					"response": []
+				},
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/configdto"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "coupon ms",
+			"item": [
+				{
+					"name": "get all coupons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8085/coupons"
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8085/couponbyid/1"
+					},
+					"response": []
+				},
+				{
+					"name": "get by code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8085/couponbycode/SUP10"
+					},
+					"response": []
+				},
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8085/configdto"
+					},
+					"response": []
+				},
+				{
+					"name": "refesh end point",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8085/actuator/refresh"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order ms",
+			"item": [
+				{
+					"name": "post an order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cid\":1,\r\n    \"pid\":1,\r\n    \"quantity\":2,\r\n    \"couponCode\":\"SUP10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:9090/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:9090/info"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API gateway",
+			"item": [
+				{
+					"name": "post an order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cid\":1,\r\n    \"pid\":1,\r\n    \"quantity\":2,\r\n    \"couponCode\":\"SUP10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8072/shoppingapp/orderservice/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "get product by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8072/shoppingapp/productservice/products/1"
+					},
+					"response": []
+				},
+				{
+					"name": "get coupon by code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8072/shoppingapp/couponservice/couponbycode/SUP10"
+					},
+					"response": []
+				},
+				{
+					"name": "customer by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8072/shoppingapp/customerservice/customers/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "oauth2",
+			"item": [
+				{
+					"name": "create order client credential",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": {
+								"clientSecret": "5bVkvECbbTPSXcN9W6QYj1aUMGj6vWDW",
+								"accessTokenUrl": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+								"addTokenTo": "header",
+								"client_authentication": "body",
+								"scope": "openid email profile",
+								"clientId": "busycoder-cc",
+								"grant_type": "client_credentials",
+								"tokenName": "clientcredentials _ccesstoken"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cid\":1,\r\n    \"pid\":1,\r\n    \"quantity\":2,\r\n    \"couponCode\":\"SUP10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8072/sunlife/shoppingapp/orderservice/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "clientCredentialAccessToken Copy 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "busycoder-cc",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "5bVkvECbbTPSXcN9W6QYj1aUMGj6vWDW",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "openid email profile",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:7080/realms/master/protocol/openid-connect/token"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
